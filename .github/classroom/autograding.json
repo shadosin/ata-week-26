@@ -1,0 +1,124 @@
+{
+  "tests": [
+    {
+      "name": "Trees Participants Participant Test",
+      "setup": "",
+      "run": "./gradlew trees-participants-participant-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Trees Participants Participant Directory Test",
+      "setup": "",
+      "run": "./gradlew trees-participants-participantdirectory-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Trees Toll Road Vehicle Test",
+      "setup": "",
+      "run": "./gradlew trees-tollroad-vehicle-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Trees Toll Road Toll Road Test",
+      "setup": "",
+      "run": "./gradlew trees-tollroad-tollroad-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Trees Library Phase 1 Test",
+      "setup": "",
+      "run": "./gradlew trees-library-phase1-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 9,
+      "points": null
+    },
+    {
+      "name": "Trees Library Phase 2 Test",
+      "setup": "",
+      "run": "./gradlew trees-library-phase2-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Futures Music Account Receiver Callables Import Account Task Test",
+      "setup": "",
+      "run": "./gradlew futures-musicaccountreceiver-callables-importaccounttask-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Futures Music Account Receiver Callables Music Account Retriever Test",
+      "setup": "",
+      "run": "./gradlew futures-musicaccountreceiver-callables-musicaccountretriever-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Futures Music Account Receiver Futures Music Account Retriever Test",
+      "setup": "",
+      "run": "./gradlew futures-musicaccountreceiver-futures-musicaccountretriever-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Group Project Phone Contacts Phase 0 Test",
+      "setup": "",
+      "run": "./gradlew groupproject-phonecontacts-phase0-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Group Project Phone Contacts Phase 1 Test",
+      "setup": "",
+      "run": "./gradlew groupproject-phonecontacts-phase1-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    },
+    {
+      "name": "Group Project Phone Contacts Phase 2 Test",
+      "setup": "",
+      "run": "./gradlew groupproject-phonecontacts-phase2-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": null
+    }
+  ]
+}
