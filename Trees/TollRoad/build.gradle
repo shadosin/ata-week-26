@@ -1,0 +1,43 @@
+plugins {
+    id 'ata-curriculum.snippets-conventions'
+}
+
+repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/KenzieAcademy-SoftwareEngineering/kenzie-java-test-infrastructure")
+        credentials {
+            username = "kenzie-gradle"
+            password = "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"
+        }
+    }
+}
+
+dependencies {
+    implementation group: 'org.reflections', name: 'reflections', version: '0.10.2'
+    testImplementation files('../../gradle/lib/testinfrastructure-1.0.1.jar')
+}
+
+checkstyle {
+    def suppressionFile = rootProject.file('Utilities/ATACheckstyle/configuration/checkstyle/unit1/suppressions.xml')
+    configProperties.put('checkstyle.suppression.filter', suppressionFile)
+}
+
+def wflowToTestsMap = [
+        'trees-tollroad-vehicle-test': [
+                'com.kenzie.trees.tollroad.VehicleTest'
+        ],
+        'trees-tollroad-tollroad-test': [
+                'com.kenzie.trees.tollroad.TollRoadTest'
+        ]
+]
+
+wflowToTestsMap.forEach { wflowName, testList ->
+    tasks.register(wflowName) {
+        dependsOn wflowtest
+        test.doFirst {
+            filter {
+                testList.each { includeTestsMatching it }
+            }
+        }
+    }
+}
