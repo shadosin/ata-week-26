@@ -6,6 +6,7 @@ import com.kenzie.futures.musicaccountreceiver.futures.resources.MusicAccountSer
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -41,11 +42,19 @@ public class MusicAccountRetriever {
 
         accountExecutor.shutdown();
 
+        assert results != null;
         for (Future<AmazonMusicAccount> result : results) {
             //PARTICIPANTS: replace the following line.
-            accountList.add(new AmazonMusicAccount("Null", 0, "Null"));
+            try {
+                AmazonMusicAccount account = result.get();
+                accountList.add(account);
+            } catch (InterruptedException | ExecutionException e) {
+                System.err.println("ImportAccountTask threw an exception.");
+                e.printStackTrace();
+            }
         }
 
+        accountExecutor.shutdown();
         return accountList;
     }
     

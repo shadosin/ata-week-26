@@ -4,6 +4,8 @@ import com.kenzie.trees.library.treestructure.BookNode;
 
 import org.apache.commons.lang.NotImplementedException;
 
+import java.util.Stack;
+
 /**
  * Application to test traversing Binary Trees and Binary Search Trees.
  *
@@ -38,8 +40,25 @@ public class LibraryService {
      */
     public boolean isBookInLibraryByIsbn(String isbn) {
         // PARTICIPANTS: IMPLEMENT YOUR BINARY SEARCH HERE
+        if (isbn == null || isbn.isEmpty()) {
+            return false;
+        }
 
-        throw new NotImplementedException("isBookInLibraryByIsbn is not yet implemented!");
+        BookNode currentNode = books;
+
+        while (currentNode != null) {
+            int comparison = isbn.compareTo(currentNode.getBook().getIsbn());
+
+            if (comparison == 0) {
+                return true; //
+            } else if (comparison < 0) {
+                currentNode = currentNode.getLeft();
+            } else {
+                currentNode = currentNode.getRight();
+            }
+        }
+
+        return false;
     }
 
 
@@ -54,7 +73,30 @@ public class LibraryService {
      */
     public boolean isBookInLibraryByTitleAndAuthor(String title, String author) {
         // PARTICIPANTS: IMPLEMENT YOUR DEPTH FIRST SEARCH HERE
+        if(author == null || title == null || author.isEmpty() || title.isEmpty()){
+            return false;
+        }
+        BookNode currentNode = books;
+        if(currentNode == null){
+            return false;
+        }
+        Stack<BookNode> bookStack = new Stack<BookNode>();
+        bookStack.push(currentNode);
+        while(!bookStack.isEmpty()){
+            BookNode current = bookStack.pop();
+            if(author.equals(current.getBook().getAuthor()) && title.equals(current.getBook().getTitle())){
+                return true;
+            }
+            if(current.getRight() != null){
+                bookStack.push(current.getRight());
+            }
+            if(current.getLeft() != null){
+                bookStack.push(current.getLeft());
+            }
+        }
 
-        throw new NotImplementedException("isBookInLibraryByTitleAndAuthor is not yet implemented!");
+        return false;
     }
+
+
 }

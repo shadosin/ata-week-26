@@ -1,5 +1,6 @@
 package com.kenzie.trees.participants;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -12,7 +13,7 @@ public class ParticipantDirectory {
     private final Map<String, Participant> usernameToParticipant;
 
     // TODO 1a: Declare a TreeMap to store participants with ID as key.
-
+    private final TreeMap<Integer, Participant> participants;
 
     /**
      * ParticipantDirectory constructor creates two TreeMaps
@@ -21,7 +22,7 @@ public class ParticipantDirectory {
     public ParticipantDirectory() {
         // Create the TreeMap to store participants with username as key.
         this.usernameToParticipant = new TreeMap<>();
-
+        this.participants = new TreeMap<>();
         // TODO 1b: Create the TreeMap to store participants with ID as key.
 
     }
@@ -38,7 +39,7 @@ public class ParticipantDirectory {
         // using the username of the Participant, p, as key.
         Participant p = new Participant(idNumber, username, fullname);
         this.usernameToParticipant.put(p.username, p);
-
+        this.participants.put(p.idNumber, p);
         // TODO 2: Store the Participant, p, in the second TreeMap
         // TODO 2: using the idNumber attribute of p as key.
 
@@ -66,7 +67,7 @@ public class ParticipantDirectory {
     public Participant getParticipantByID(Integer idNumber) {
         // TODO 3: Return the Participant associated with the given idNumber
         // TODO 3: using the second TreeMap created in step 1.
-        return null;
+        return this.participants.get(idNumber);
     }
 
     /**
@@ -94,7 +95,17 @@ public class ParticipantDirectory {
     public String getRosterByID() {
         // TODO 4: Use the second TreeMap created in step 1 to build and return
         // TODO 4: return a String containing a participant roster sorted by ID.
-        return null;
+        StringBuilder sb = new StringBuilder();
+
+        this.participants.values()
+                .stream()
+                .sorted(Comparator.comparing(participant -> participant.idNumber))
+                .forEach(participant -> {
+                    sb.append(participant);
+                    sb.append("\n");
+                });
+
+        return sb.toString();
     }
 
     /**

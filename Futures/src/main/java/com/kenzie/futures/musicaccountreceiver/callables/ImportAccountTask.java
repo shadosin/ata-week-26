@@ -1,8 +1,11 @@
 package com.kenzie.futures.musicaccountreceiver.callables;
 
+import com.kenzie.futures.musicaccountreceiver.callables.resources.AmazonMusicAccount;
 import com.kenzie.futures.musicaccountreceiver.callables.resources.MusicAccountService;
 
-public class ImportAccountTask {
+import java.util.concurrent.Callable;
+
+public class ImportAccountTask implements Callable<AmazonMusicAccount> {
     // PARTICIPANTS: Complete this class's declaration and implement the call() method.
 
     private MusicAccountService accountService;
@@ -32,7 +35,7 @@ public class ImportAccountTask {
      *   from the MusicAccountService.
      * @return AmazonMusicAccount object.
      */
-    public Object call() {
-        return null;
+    public AmazonMusicAccount call() {
+        return accountService.getAccount(accountID);
     }
 }

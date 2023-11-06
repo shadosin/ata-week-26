@@ -4,6 +4,10 @@ package com.kenzie.trees.tollroad;
 // import java.util.Map;
 // import java.util.TreeMap;
 
+import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * Application to demonstrate a TreeMap storing key:value pairs in sorted
  * order based on natural ordering of keys and also a different ordering
@@ -12,6 +16,8 @@ package com.kenzie.trees.tollroad;
 public class TollRoad {
     // TODO 1: Declare two Map variables to associate String keys with Vehicle objects.
     // TODO 1: One will sort by vehicle description and one will sort by vehicle state.
+    private final Map<String, Vehicle> descriptionTree;
+    private final Map<String, Vehicle> stateTree;
 
 
 
@@ -23,7 +29,9 @@ public class TollRoad {
     public TollRoad() {
         // TODO 2: Create the two TreeMap objects, the second of which must be
         // TODO 2: given an appropriate Comparator object when constructed.
-
+        this.descriptionTree = new TreeMap<>();
+        Comparator<String> stateComparator = Comparator.comparing(s -> s.substring(1, 4));
+        this.stateTree = new TreeMap<>(stateComparator);
 
     }
 
@@ -38,6 +46,21 @@ public class TollRoad {
     public void addToll(String description) {
         // TODO 3: Complete this method as described in the exercise.
 
+
+        if (!descriptionTree.containsKey(description)) {
+            Vehicle newVehicle = new Vehicle(description);
+            descriptionTree.put(description, newVehicle);
+        } else {
+            descriptionTree.get(description).addToll();
+        }
+        //descriptionTree.getOrDefault(description, new Vehicle(description)).addToll();
+        if (!stateTree.containsKey(description)) {
+            Vehicle stateVehicle = new Vehicle(description);
+            stateTree.put(description, stateVehicle);
+        } else {
+            stateTree.get(description).addToll();
+        }
+        //stateTree.getOrDefault(description, new Vehicle(description)).addToll();
     }
 
     /**
@@ -47,8 +70,11 @@ public class TollRoad {
      * @return String containing the current vehicles, sorted by description.
      */
     public String getVehicleReportByDescription() {
-        // TODO 4: Complete this method as described in the exercise.
-        return null;
+        StringBuilder report = new StringBuilder();
+        descriptionTree.forEach((description, vehicle) ->
+                report.append("Description: ").append(description).append(", Toll Count: ").append(vehicle.tollCount).append("\n")
+        );
+        return report.toString();
     }
 
     /**
@@ -58,9 +84,13 @@ public class TollRoad {
      * @return String containing the current vehicles, sorted by state.
      */
     public String getVehicleReportByState() {
-        // TODO 5: Complete this method as described in the exercise.
-        return null;
-    }
+
+            StringBuilder report = new StringBuilder();
+            stateTree.forEach((description, vehicle) ->
+                    report.append("Description: ").append(description).append(", Toll Count: ").append(vehicle.tollCount).append("\n")
+            );
+            return report.toString();
+        }
 
     /**
      * Main method to demonstrate the Toll Road and Vehicle classes.

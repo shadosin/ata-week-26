@@ -5,7 +5,9 @@ import com.kenzie.groupwork.phonecontacts.model.Name;
 import com.kenzie.groupwork.phonecontacts.model.SortBy;
 import com.kenzie.groupwork.phonecontacts.model.SortOrder;
 
+import java.util.Comparator;
 import java.util.SortedMap;
+import java.util.TreeMap;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -23,8 +25,8 @@ public class ContactDao {
 
     @Inject
     public ContactDao() {
-        this.contactsSortedByFirstName = null;
-        this.contactsSortedByLastName = null;
+        this.contactsSortedByFirstName = new TreeMap<>(Comparator.comparing(Name::getFirstName));
+        this.contactsSortedByLastName = new TreeMap<>(Comparator.comparing(Name::getLastName));
     }
 
     /**
@@ -47,7 +49,19 @@ public class ContactDao {
      */
     public SortedMap<Name, Contact> getContacts(SortBy sortBy, SortOrder sortOrder) {
         // TODO implement
-        return null;
+        SortedMap<Name, Contact> contacts;
+        if(sortBy == SortBy.FIRST_NAME && sortOrder == SortOrder.ASCENDING){
+            contacts = contactsSortedByFirstName;
+        } else if (sortBy == SortBy.FIRST_NAME && sortOrder == SortOrder.DESCENDING) {
+            contacts = new TreeMap<>(contactsSortedByFirstName).descendingMap();
+        } else if (sortBy == SortBy.LAST_NAME && sortOrder == SortOrder.ASCENDING) {
+            contacts = contactsSortedByLastName;
+        }else if (sortBy == SortBy.LAST_NAME && sortOrder == SortOrder.DESCENDING){
+            contacts = new TreeMap<>(contactsSortedByLastName).descendingMap();
+        }else{
+            contacts = contactsSortedByLastName;
+        }
+        return contacts;
     }
 
     /**
@@ -70,7 +84,8 @@ public class ContactDao {
      */
     public SortedMap<Name, Contact> getContactsStartingAt(Name startKey, SortBy sortBy, SortOrder sortOrder) {
         // TODO implement
-        return null;
+        SortedMap<Name, Contact> startingContacts = getContacts(sortBy, sortOrder);
+        return startingContacts.tailMap(startKey);
     }
 
 }
